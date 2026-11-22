@@ -97,12 +97,9 @@ notes_html = notes_html.replace('</ol>', add + '</ol>', 1)
 # Temel EPUB'dan gelen eski 481 nota da aynı semantiği taşısın
 notes_html = re.sub(r'<li id="note-(\d+)"(?![^>]*epub:type)',
                     r'<li id="note-\1" epub:type="footnote" role="doc-footnote"', notes_html)
-notes_html = notes_html.replace(
-    '</p>\n<p class="note-intro">Özel adlar ve',
-    '</p>\n<p class="note-intro">Bu baskıda toplam 621 not bulunur: Hitagi Yengeci 1–143, '
-    'Mayoi Salyangozu 144–279, Tsubasa Kedisi 280–481, Suruga Maymunu 482–560, '
-    'Nadeko Yılanı 561–621. Her notun sonundaki ↩ bağlantısı metindeki ilgili yere döner.</p>\n'
-    '<p class="note-intro">Özel adlar ve', 1)
+# Notlar bölümünün başındaki açıklama paragrafları istenmiyor
+removed_intros = len(re.findall(r'<p class="note-intro">.*?</p>', notes_html, flags=re.S))
+notes_html = re.sub(r'\n?<p class="note-intro">.*?</p>', '', notes_html, flags=re.S)
 text['EPUB/text/notes.xhtml'] = notes_html
 
 # Notlar bölümü her zaman yeni bir sayfada başlar
@@ -226,3 +223,4 @@ os.replace(tmp, SRC_EPUB)
 print(f'EPUB güncellendi: {SRC_EPUB}')
 print(f'Yeni dipnot: {len(notes)} (note-{NOTE_START}..note-{NOTE_START+len(notes)-1})')
 print(f'Suruga alt bölüm: {len(suruga_secs)}, Nadeko alt bölüm: {len(nadeko_secs)}')
+print(f'Kaldırılan açıklama paragrafı: {removed_intros}')
