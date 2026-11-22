@@ -88,6 +88,12 @@ for num, ntext, cfile, pid in notes:
             f'<a href="{cfile}#{pid}" class="backref" aria-label="Metindeki yere dön">↩</a></li>\n')
 assert '</ol>' in notes_html
 notes_html = notes_html.replace('</ol>', add + '</ol>', 1)
+notes_html = notes_html.replace(
+    '</p>\n<p class="note-intro">Özel adlar ve',
+    '</p>\n<p class="note-intro">Bu baskıda toplam 621 not bulunur: Hitagi Yengeci 1–143, '
+    'Mayoi Salyangozu 144–279, Tsubasa Kedisi 280–481, Suruga Maymunu 482–560, '
+    'Nadeko Yılanı 561–621. Her notun sonundaki ↩ bağlantısı metindeki ilgili yere döner.</p>\n'
+    '<p class="note-intro">Özel adlar ve', 1)
 text['EPUB/text/notes.xhtml'] = notes_html
 
 # 4) Bölüm/alt bölüm dizinleri
@@ -114,8 +120,10 @@ for _, title, cf, _, anchors in ARCS:
     for i, a in enumerate(anchors, 1):
         nav += f'<li><a href="text/{cf}#{a}">{i:03d}</a></li>\n'
     nav += '</ol>\n</li>\n'
+nav += '<li><a href="text/notes.xhtml#cevirmen-notlari">Çevirmen Notları</a></li>\n'
 nav += ('</ol>\n</nav>\n<nav epub:type="landmarks" hidden="hidden">\n<h2>Rehber</h2>\n'
-        '<ol><li><a epub:type="bodymatter" href="text/chapter1.xhtml">Metin</a></li></ol>\n'
+        '<ol><li><a epub:type="bodymatter" href="text/chapter1.xhtml">Metin</a></li>'
+        '<li><a epub:type="footnotes" href="text/notes.xhtml#cevirmen-notlari">Çevirmen Notları</a></li></ol>\n'
         '</nav>\n</body>\n</html>\n')
 text['EPUB/nav.xhtml'] = nav
 
@@ -137,6 +145,9 @@ for _, title, cf, _, anchors in ARCS:
                 f'<content src="text/{cf}#{a}"/></navPoint>\n')
         po += 1
     ncx += '</navPoint>\n'
+ncx += (f'<navPoint id="np{po}" playOrder="{po}"><navLabel><text>Çevirmen Notları</text></navLabel>'
+        f'<content src="text/notes.xhtml#cevirmen-notlari"/></navPoint>\n')
+po += 1
 ncx += '</navMap>\n</ncx>\n'
 text['EPUB/toc.ncx'] = ncx
 
@@ -145,13 +156,14 @@ idx = ('<?xml version="1.0" encoding="utf-8"?>\n'
  '<head><meta charset="utf-8"/><title>İçindekiler</title>\n'
  '<link rel="stylesheet" type="text/css" href="../styles/main.css"/></head>\n<body>\n'
  '<section id="icerindekiler">\n<h1>İçindekiler</h1>\n'
- '<p class="note-intro">Beş bölüm ve alt bölümler; dilediğiniz yerden başlayabilirsiniz.</p>\n'
+ '<p class="note-intro">Beş bölüm, alt bölümler ve Çevirmen Notları; dilediğiniz yerden başlayabilirsiniz.</p>\n'
  '<ol class="toc-list">\n')
 for i, title, cf, bid, anchors in ARCS:
     idx += f'<li><a href="{cf}#{bid}">{escape(title)}</a>\n<ol class="subtoc-list">\n'
     for j, a in enumerate(anchors, 1):
         idx += f'<li><a href="{cf}#{a}">{j:03d}</a></li>\n'
     idx += '</ol>\n</li>\n'
+idx += '<li><a href="notes.xhtml#cevirmen-notlari">Çevirmen Notları</a></li>\n'
 idx += '</ol>\n</section>\n</body>\n</html>\n'
 text['EPUB/text/icerindekiler.xhtml'] = idx
 
