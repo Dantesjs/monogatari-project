@@ -82,12 +82,21 @@ text['EPUB/text/chapter4.xhtml'] = nadeko_html
 
 # 3) Dipnotları genişlet
 notes_html = text['EPUB/text/notes.xhtml']
+# Notlar, okuyucular tarafından gizlenebilen "footnotes" kaynağı değil,
+# kitabın sonundaki normal bir bölüm olarak işaretlenir.
+notes_html = notes_html.replace(
+    '<section epub:type="footnotes" id="cevirmen-notlari">',
+    '<section epub:type="chapter" id="cevirmen-notlari">', 1)
 add = ''
 for num, ntext, cfile, pid in notes:
-    add += (f'<li id="note-{num}"><span class="note-num">{num}.</span> {escape(ntext)} '
+    add += (f'<li id="note-{num}" epub:type="footnote" role="doc-footnote">'
+            f'<span class="note-num">{num}.</span> {escape(ntext)} '
             f'<a href="{cfile}#{pid}" class="backref" aria-label="Metindeki yere dön">↩</a></li>\n')
 assert '</ol>' in notes_html
 notes_html = notes_html.replace('</ol>', add + '</ol>', 1)
+# Temel EPUB'dan gelen eski 481 nota da aynı semantiği taşısın
+notes_html = re.sub(r'<li id="note-(\d+)"(?![^>]*epub:type)',
+                    r'<li id="note-\1" epub:type="footnote" role="doc-footnote"', notes_html)
 notes_html = notes_html.replace(
     '</p>\n<p class="note-intro">Özel adlar ve',
     '</p>\n<p class="note-intro">Bu baskıda toplam 621 not bulunur: Hitagi Yengeci 1–143, '
@@ -95,6 +104,13 @@ notes_html = notes_html.replace(
     'Nadeko Yılanı 561–621. Her notun sonundaki ↩ bağlantısı metindeki ilgili yere döner.</p>\n'
     '<p class="note-intro">Özel adlar ve', 1)
 text['EPUB/text/notes.xhtml'] = notes_html
+
+# Notlar bölümü her zaman yeni bir sayfada başlar
+css_name = 'EPUB/styles/main.css'
+css_txt = parts[css_name].decode('utf-8')
+if '#cevirmen-notlari h1' not in css_txt:
+    css_txt += '\n#cevirmen-notlari h1 { page-break-before: always; }\n'
+parts[css_name] = css_txt.encode('utf-8')
 
 # 4) Bölüm/alt bölüm dizinleri
 ARCS = [
@@ -120,10 +136,11 @@ for _, title, cf, _, anchors in ARCS:
     for i, a in enumerate(anchors, 1):
         nav += f'<li><a href="text/{cf}#{a}">{i:03d}</a></li>\n'
     nav += '</ol>\n</li>\n'
-nav += '<li><a href="text/notes.xhtml#cevirmen-notlari">Çevirmen Notları</a></li>\n'
+# Fragment kullanılmaz: bazı okuyucular #id parçasını çözüp kitabın başına döner.
+nav += '<li><a href="text/notes.xhtml">Çevirmen Notları</a></li>\n'
 nav += ('</ol>\n</nav>\n<nav epub:type="landmarks" hidden="hidden">\n<h2>Rehber</h2>\n'
         '<ol><li><a epub:type="bodymatter" href="text/chapter1.xhtml">Metin</a></li>'
-        '<li><a epub:type="footnotes" href="text/notes.xhtml#cevirmen-notlari">Çevirmen Notları</a></li></ol>\n'
+        '<li><a href="text/notes.xhtml">Çevirmen Notları</a></li></ol>\n'
         '</nav>\n</body>\n</html>\n')
 text['EPUB/nav.xhtml'] = nav
 
@@ -146,7 +163,7 @@ for _, title, cf, _, anchors in ARCS:
         po += 1
     ncx += '</navPoint>\n'
 ncx += (f'<navPoint id="np{po}" playOrder="{po}"><navLabel><text>Çevirmen Notları</text></navLabel>'
-        f'<content src="text/notes.xhtml#cevirmen-notlari"/></navPoint>\n')
+        f'<content src="text/notes.xhtml"/></navPoint>\n')
 po += 1
 ncx += '</navMap>\n</ncx>\n'
 text['EPUB/toc.ncx'] = ncx
@@ -163,7 +180,7 @@ for i, title, cf, bid, anchors in ARCS:
     for j, a in enumerate(anchors, 1):
         idx += f'<li><a href="{cf}#{a}">{j:03d}</a></li>\n'
     idx += '</ol>\n</li>\n'
-idx += '<li><a href="notes.xhtml#cevirmen-notlari">Çevirmen Notları</a></li>\n'
+idx += '<li><a href="notes.xhtml">Çevirmen Notları</a></li>\n'
 idx += '</ol>\n</section>\n</body>\n</html>\n'
 text['EPUB/text/icerindekiler.xhtml'] = idx
 
@@ -184,8 +201,8 @@ manifest = '<manifest>\n' + ''.join(
       ('cover','cover.jpg','image/jpeg',' properties="cover-image"'),
     ]) + '</manifest>\n'
 spine = ('<spine toc="ncx">\n' + ''.join(
-    f'<itemref idref="{x}"/>\n' for x in
-    ['icerindekiler','c1','c2','c3','c4','c5','notes']) + '</spine>\n')
+    f'<itemref idref="{x}"' + (' linear="yes"' if x == 'notes' else '') + '/>\n'
+    for x in ['icerindekiler','c1','c2','c3','c4','c5','notes']) + '</spine>\n')
 opf = re.sub(r'<manifest>.*?</manifest>', manifest, opf, flags=re.S)
 opf = re.sub(r'<spine.*?</spine>', spine, opf, flags=re.S)
 opf = re.sub(r'<dc:description>.*?</dc:description>',
