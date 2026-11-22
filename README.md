@@ -13,6 +13,9 @@ Bu depo, Nisio Isin tarafından yazılan Monogatari serisinin Türkçe çevirile
 Serinin ilk eserinin Türkçe tam çevirisi.
 
 * **Dosya:** `01_Bakemonogatari_TUM_BOLUMLER_TR.epub`
+* **Kapsam:** Japonca orijinalden yapılmış 5 bölümün tamamı (3. ve 4. bölümler bu güncellemede eklendi)
+* **Ekler:** 621 çevirmen notu, beş bölüm ve alt bölümler için içindekiler/EPUB navigasyonu
+* **Çeviri çalışma dosyaları:** `bakemonogatari_tr/` (kaynak parçalar, terminoloji sözlüğü `GLOSSARY.md`, üslup kılavuzu `STYLE_BRIEF.md`, denetim raporları ve EPUB derleme betiği)
 
 **İçerdiği bölümler**
 1. Hitagi Crab (Hitagi Yengeci)
