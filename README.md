@@ -1,23 +1,33 @@
 # Monogatari Project
 
-Bakemonogatari (化物語) Türkçe Çeviri EPUB
+Monogatari Serisi (物語シリーズ) Türkçe Çeviri EPUB'leri
 
 ---
 
 ## 📖 Hakkında
 
-Bu depo, Nisio Isin tarafından yazılan Monogatari serisinin ilk eseri olan **Bakemonogatari**'nin Türkçe tam çevirisini (`.epub` formatında) barındırmaktadır.
+Bu depo, Nisio Isin tarafından yazılan Monogatari serisinin Türkçe çevirilerini (`.epub` formatında) barındırmaktadır.
 
-* **Eser:** Bakemonogatari (Tüm Bölümler)
-* **Format:** EPUB
+### 01 — Bakemonogatari (化物語)
+
+Serinin ilk eserinin Türkçe tam çevirisi.
+
 * **Dosya:** `01_Bakemonogatari_TUM_BOLUMLER_TR.epub`
 
-### İçerdiği Bölümler
+**İçerdiği bölümler**
 1. Hitagi Crab (Hitagi Yengeci)
 2. Mayoi Snail (Mayoi Salyangozu)
 3. Suruga Monkey (Suruga Maymunu)
 4. Nadeko Snake (Nadeko Yılanı)
 5. Tsubasa Cat (Tsubasa Kedisi)
+
+### 04 — Kizumonogatari (傷物語)
+
+"Sıfırıncı Bölüm: Koyomi Vamp" (こよみヴァンプ) adlı eserin Japonca orijinalden yapılmış Türkçe tam çevirisi.
+
+* **Dosya:** `04_Kizumonogatari_TR.epub`
+* **Kapsam:** 001–018 arası tüm bölümler, yazarın afterword'u ve yazar/çizer biyografileri
+* **Ekler:** 109 çevirmen ve yerelleştirme dipnotu, bölüm dizini ve EPUB navigasyonu
 
 ---
 
