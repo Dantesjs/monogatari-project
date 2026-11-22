@@ -170,7 +170,7 @@ idx = ('<?xml version="1.0" encoding="utf-8"?>\n'
  '<head><meta charset="utf-8"/><title>İçindekiler</title>\n'
  '<link rel="stylesheet" type="text/css" href="../styles/main.css"/></head>\n<body>\n'
  '<section id="icerindekiler">\n<h1>İçindekiler</h1>\n'
- '<p class="note-intro">Beş bölüm, alt bölümler ve Çevirmen Notları; dilediğiniz yerden başlayabilirsiniz.</p>\n'
+ 
  '<ol class="toc-list">\n')
 for i, title, cf, bid, anchors in ARCS:
     idx += f'<li><a href="{cf}#{bid}">{escape(title)}</a>\n<ol class="subtoc-list">\n'
