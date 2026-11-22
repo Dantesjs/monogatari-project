@@ -42,14 +42,20 @@ def render_chapter(chunks, title, subtitle, bolum):
         if not m:
             raise ValueError('Beklenmeyen satır: ' + line[:120])
         pid, body = m.group(1), m.group(2)
-        def note_sub(mm):
+        # Metni parça parça kaçır; dipnot HTML'ini kaçırma (aksi halde literal görünür).
+        parts, pos = [], 0
+        for nm in re.finditer(r'\[\[N: (.*?)\]\]', body):
+            parts.append(escape(body[pos:nm.start()]))
             num = NOTE_START + len(notes)
-            notes.append((num, mm.group(1), f'chapter{"3" if bolum==3 else "4"}.xhtml', pid))
-            return (f'<a id="nr-{num}" href="notes.xhtml#note-{num}" epub:type="noteref" '
-                    f'class="noteref"><sup>[{num}]</sup></a>')
-        body = re.sub(r'\[\[N: (.*?)\]\]', note_sub, body)
-        out.append(f'<p id="{pid}">{escape(body)}</p>')
+            notes.append((num, nm.group(1), f'chapter{bolum}.xhtml', pid))
+            parts.append(f'<a id="nr-{num}" href="notes.xhtml#note-{num}" epub:type="noteref" '
+                         f'class="noteref"><sup>[{num}]</sup></a>')
+            pos = nm.end()
+        parts.append(escape(body[pos:]))
+        out.append(f'<p id="{pid}">{"".join(parts)}</p>')
     chapter_file = f'chapter{bolum}.xhtml'
+    title_main, _, title_sub = title.partition(': ')
+    title_html = escape(title_main) + ('<br/>' + escape(title_sub) if title_sub else '')
     return (
         '<?xml version="1.0" encoding="utf-8"?>\n'
         '<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="tr">\n'
@@ -57,7 +63,7 @@ def render_chapter(chunks, title, subtitle, bolum):
         '<link rel="stylesheet" type="text/css" href="../styles/main.css"/></head>\n'
         '<body>\n'
         f'<section epub:type="chapter" id="bolum{bolum}">\n'
-        f'<h1 class="chapter-title">{escape(title.replace(": ", "<br/>", 1))}</h1>\n'
+        f'<h1 class="chapter-title">{title_html}</h1>\n'
         f'<p class="chapter-sub">{escape(subtitle)}</p>\n'
         + '\n'.join(out) + '\n'
         '</section>\n</body>\n</html>\n'
