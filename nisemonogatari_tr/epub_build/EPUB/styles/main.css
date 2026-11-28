@@ -1,0 +1,13 @@
+body { font-family: serif; line-height: 1.6; margin: 1em; }
+h1.chapter-title { text-align: center; font-size: 1.6em; margin: 2em 0 0.3em; }
+p.chapter-sub { text-align: center; color: #666; font-size: 0.9em; margin-bottom: 2em; }
+h3.section-no { text-align: center; color: #888; font-size: 1em; margin: 2em 0 1em; }
+p { text-indent: 1em; margin: 0.4em 0; }
+p:first-of-type { text-indent: 0; }
+.noteref { text-decoration: none; }
+.noteref sup { color: #a00; font-size: 0.7em; }
+.note-list { line-height: 1.5; }
+.note-num { font-weight: bold; }
+.backref { text-decoration: none; color: #888; }
+#cevirmen-notlari h1 { page-break-before: always; }
+.toc-list, .subtoc-list { line-height: 1.8; }

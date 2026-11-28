@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="tr">
+<head>
+<meta name="dtb:uid" content="urn:uuid:e8b61c8a-7c91-4e08-9a3c-5528eb1e9678"/>
+<meta name="dtb:depth" content="2"/>
+<meta name="dtb:totalPageCount" content="0"/>
+<meta name="dtb:maxPageNumber" content="0"/>
+</head>
+<docTitle>
+<text>Kizumonogatari — Türkçe Çeviri</text>
+</docTitle>
+<docAuthor>
+<text>西尾維新 (Nisio Isin)</text>
+</docAuthor>
+<navMap>
+<navPoint id="np-1" playOrder="1">
+<navLabel><text>İçindekiler</text></navLabel>
+<content src="text/icerindekiler.xhtml"/>
+</navPoint>
+<navPoint id="np-2" playOrder="2">
+<navLabel><text>Sıfırıncı Bölüm: Koyomi Vamp</text></navLabel>
+<content src="text/chapter1.xhtml"/>
+<navPoint id="np-3" playOrder="3">
+<navLabel><text>001 — Giriş</text></navLabel>
+<content src="text/chapter1.xhtml#P0001"/>
+</navPoint>
+<navPoint id="np-4" playOrder="4">
+<navLabel><text>002 — İnsanlık Mukavemeti</text></navLabel>
+<content src="text/chapter1.xhtml#P0042"/>
+</navPoint>
+<navPoint id="np-5" playOrder="5">
+<navLabel><text>003 — Demirkanlı Vampir</text></navLabel>
+<content src="text/chapter1.xhtml#P0481"/>
+</navPoint>
+<navPoint id="np-6" playOrder="6">
+<navLabel><text>004 — Alevler İçinde Diriliş</text></navLabel>
+<content src="text/chapter1.xhtml#P0931"/>
+</navPoint>
+<navPoint id="np-7" playOrder="7">
+<navLabel><text>005 — Üç Cellat ve Kurtarıcı</text></navLabel>
+<content src="text/chapter1.xhtml#P1340"/>
+</navPoint>
+</navPoint>
+<navPoint id="np-8" playOrder="8">
+<navLabel><text>Çevirmen Notları</text></navLabel>
+<content src="text/notes.xhtml"/>
+</navPoint>
+</navMap>
+</ncx>

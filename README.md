@@ -31,6 +31,29 @@ Serinin ilk eserinin Türkçe tam çevirisi.
 * **Dosya:** `04_Kizumonogatari_TR.epub`
 * **Kapsam:** 001–018 arası tüm bölümler, yazarın afterword'u ve yazar/çizer biyografileri
 * **Ekler:** 109 çevirmen ve yerelleştirme dipnotu, bölüm dizini ve EPUB navigasyonu
+* **Çeviri çalışma dosyaları:** `kizumonogatari_tr/`
+
+### 05-06 — Nisemonogatari (偽物語)
+
+Nisemonogatari serisinin (Üst ve Alt Cilt) Japonca orijinalden yapılmış Türkçe tam çevirisi.
+
+* **Dosya:** `05-06_Nisemonogatari_TR.epub`
+* **Kapsam:**
+  1. Altıncı Bölüm: Karen Arısı (かれんビー / Karen Bee) — 22 alt bölüm
+  2. Son Bölüm: Tsukihi Anka (つきひフェニックス / Tsukihi Phoenix) — 13 alt bölüm
+  3. Yazarın Notu: Üst Cilt & Alt Cilt (Afterwords)
+* **Ekler:** 343 açıklayıcı çevirmen ve yerelleştirme dipnotu, iki yönlü EPUB navigasyonu, tam içindekiler
+* **Çeviri çalışma dosyaları:** `nisemonogatari_tr/` (kaynak metinler, parçalı taslaklar, terminoloji sözlüğü `GLOSSARY.md`, üslup kılavuzu `STYLE_BRIEF.md`, doğrulama ve derleme betikleri)
+
+---
+
+## 📚 Seri Sıralaması ve Okuma Düzeni (ReadEra / Calibre)
+
+Tüm EPUB dosyaları standart Kodansha Box yayın sıralamasına uygun olarak Calibre ve ReadEra serisi metadata etiketleriyle (`monogatari(türkce)`) yapılandırılmıştır:
+
+1. **#1** — `01 - Bakemonogatari (Türkçe)` (`01_Bakemonogatari_TUM_BOLUMLER_TR.epub`)
+2. **#4** — `04 - Kizumonogatari (Türkçe)` (`04_Kizumonogatari_TR.epub`)
+3. **#5** — `05 - Nisemonogatari (Türkçe)` (`05-06_Nisemonogatari_TR.epub`)
 
 ---
 
